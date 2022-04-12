@@ -72,16 +72,6 @@
       "CompatibilityLevel": 1200
     },
     {
-      "ID": "SNOWFLAKE_SCHEMA_ARCHITECTURE",
-      "Name": "[Performance] Consider a star-schema instead of a snowflake architecture",
-      "Category": "Performance",
-      "Description": "Generally speaking, a star-schema is the optimal architecture for tabular models. That being the case, there are valid cases to use a snowflake approach. Please check your model and consider moving to a star-schema architecture.\r\nReference: https://docs.microsoft.com/en-us/power-bi/guidance/star-schema",
-      "Severity": 2,
-      "Scope": "Table, CalculatedTable",
-      "Expression": "UsedInRelationships.Any(current.Name == FromTable.Name)\r\nand\r\nUsedInRelationships.Any(current.Name == ToTable.Name)",
-      "CompatibilityLevel": 1200
-    },
-    {
       "ID": "DATE/CALENDAR_TABLES_SHOULD_BE_MARKED_AS_A_DATE_TABLE",
       "Name": "[Performance] Date/calendar tables should be marked as a date table",
       "Category": "Performance",
