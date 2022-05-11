@@ -92,16 +92,6 @@
       "CompatibilityLevel": 1200
     },
     {
-      "ID": "AVOID_EXCESSIVE_BI-DIRECTIONAL_OR_MANY-TO-MANY_RELATIONSHIPS",
-      "Name": "[Performance] Avoid excessive bi-directional or many-to-many relationships",
-      "Category": "Performance",
-      "Description": "Limit use of b-di and many-to-many relationships. This rule flags the model if more than 30% of relationships are bi-di or many-to-many.\r\nReference: https://www.sqlbi.com/articles/bidirectional-relationships-and-ambiguity-in-dax/",
-      "Severity": 2,
-      "Scope": "Model",
-      "Expression": "(\r\n\nRelationships.Where(CrossFilteringBehavior == CrossFilteringBehavior.BothDirections).Count()\r\n\n+\r\n\nRelationships.Where(FromCardinality.ToString() == \"Many\" && ToCardinality.ToString() == \"Many\").Count()\r\n\n)\r\n\n\n/\r\n\n\nMath.Max(Convert.ToDecimal(Relationships.Count)\n\n,1)> 0.3",
-      "CompatibilityLevel": 1200
-    },
-    {
       "ID": "LIMIT_ROW_LEVEL_SECURITY_(RLS)_LOGIC",
       "Name": "[Performance] Limit row level security (RLS) logic",
       "Category": "Performance",
@@ -132,25 +122,6 @@
       "CompatibilityLevel": 1200
     },
     {
-      "ID": "MANY-TO-MANY_RELATIONSHIPS_SHOULD_BE_SINGLE-DIRECTION",
-      "Name": "[Performance] Many-to-many relationships should be single-direction",
-      "Category": "Performance",
-      "Severity": 2,
-      "Scope": "Relationship",
-      "Expression": "FromCardinality == \"Many\"\nand\nToCardinality == \"Many\"\nand\nCrossFilteringBehavior == \"BothDirections\"",
-      "CompatibilityLevel": 1200
-    },
-    {
-      "ID": "REDUCE_USAGE_OF_CALCULATED_TABLES",
-      "Name": "[Performance] Reduce usage of calculated tables",
-      "Category": "Performance",
-      "Description": "Migrate calculated table logic to your data warehouse. Reliance on calculated tables will lead to technical debt and potential misalignments if you have multiple models on your platform.",
-      "Severity": 2,
-      "Scope": "CalculatedTable",
-      "Expression": "1=1",
-      "CompatibilityLevel": 1200
-    },
-    {
       "ID": "REMOVE_REDUNDANT_COLUMNS_IN_RELATED_TABLES",
       "Name": "[Performance] Remove redundant columns in related tables",
       "Category": "Performance",
@@ -177,16 +148,6 @@
       "Severity": 2,
       "Scope": "Model",
       "Expression": "AllColumns.Where(Type.ToString() == \"Calculated\").Count() > 5",
-      "CompatibilityLevel": 1200
-    },
-    {
-      "ID": "CHECK_IF_BI-DIRECTIONAL_AND_MANY-TO-MANY_RELATIONSHIPS_ARE_VALID",
-      "Name": "[Performance] Check if bi-directional and many-to-many relationships are valid",
-      "Category": "Performance",
-      "Description": "Bi-directional and many-to-many relationships may cause performance degradation or even have unintended consequences. Make sure to check these specific relationships to ensure they are working as designed and are actually necessary.\r\nReference: https://www.sqlbi.com/articles/bidirectional-relationships-and-ambiguity-in-dax/",
-      "Severity": 1,
-      "Scope": "Relationship",
-      "Expression": "FromCardinality.ToString() = \"Many\" and ToCardinality.ToString() = \"Many\"\r\nor\r\nCrossFilteringBehavior == CrossFilteringBehavior.BothDirections",
       "CompatibilityLevel": 1200
     },
     {
